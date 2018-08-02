@@ -5,57 +5,55 @@ import demo.springboottest.model.Employee;
 
 /*
  * Service interface for managing the persistence and retrieval of  {@link Employee} object from database.
+ * @author rmorais
  */
 
 public interface EmployeeService {
 
 	/**
 	 * Adds an employee.
-	 *
-	 * @param employee An employee object.
 	 * 
+	 * @param employee
+	 *            An employee object.
 	 * @return An instance of the Employee class with all attributes populated from
 	 *         the database.
-	 *         
-	 * @see Employee        
+	 * @see Employee
 	 */
 	public Employee addEmployee(Employee employee);
 
 	/**
 	 * Gets all employees.
-	 *
-	 * @return A List of all Employee objects with all attributes populated from
-	 *         the database.
-	 *         
-	 * @see Employee        
+	 * 
+	 * @return A List of all Employee objects with all attributes populated from the
+	 *         database.
+	 * 
+	 * @see Employee
 	 */
 	public List<Employee> getAllEmployees();
 
 	/**
 	 * Gets an employee by id.
-	 *
-	 * @param id The employee id.
 	 * 
-	 * @return	An instance of the Employee class with all attributes populated from
+	 * @param id
+	 *            The employee id.
+	 * @return An instance of the Employee class with all attributes populated from
 	 *         the database.
-	 *         
-	 * @exception EmployeeNotFoundException if employee does not exist.  
-	 * 
-	 * @see Employee 
+	 * @exception EmployeeNotFoundException
+	 *                if employee does not exist.
+	 * @see Employee
 	 */
-	public Employee getEmployeeById(Long id);
+	public Employee getEmployeeById(final Long id);
 
 	/**
 	 * Gets an employee by name.
 	 * 
-	 * @param name The employee name.
-	 *
-	 * @return	An instance of the Employee class with all attributes populated from
+	 * @param name
+	 *            The employee name.
+	 * @return An instance of the Employee class with all attributes populated from
 	 *         the database.
-	 *         
-	 * @exception EmployeeNotFoundException if employee does not exist.
-	 * 
-	 * @see Employee 
+	 * @exception EmployeeNotFoundException
+	 *                if employee does not exist.
+	 * @see Employee
 	 */
-	public Employee getEmployeeByName(String name);
+	public Employee getEmployeeByName(final String name);
 }

@@ -11,7 +11,6 @@ import demo.springboottest.repository.EmployeeRepository;
 
 /*
  * Implements the EmployeeService interface for managing the persistence and retrieval of Employee object from database.
- * 
  * @author rmorais
  */
 
@@ -25,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Employee addEmployee(Employee employee) {
+	public final Employee addEmployee(final Employee employee) {
 		employeeRepository.save(employee);
 		return employeeRepository.findByName(employee.getName());
 	}
@@ -34,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Employee> getAllEmployees() {
+	public final List<Employee> getAllEmployees() {
 		return employeeRepository.findAll();
 	}
 
@@ -42,11 +41,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Employee getEmployeeById(Long id) {
+	public final Employee getEmployeeById(final Long id) {
 		Optional<Employee> result = employeeRepository.findById(id);
-		if(result.isPresent())
+		if (result.isPresent())
 			return result.get();
-		else  
+		else
 			throw new EmployeeNotFoundException(String.format("Employee [%s] doesn't exist.", id));
 	}
 
@@ -54,11 +53,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Employee getEmployeeByName(String name) {
+	public final Employee getEmployeeByName(final String name) {
 		Employee employee = employeeRepository.findByName(name);
-		if (employee != null) 
+		if (employee != null)
 			return employee;
-		else  
+		else
 			throw new EmployeeNotFoundException(String.format("Employee [%s] doesn't exist.", name));
 	}
 }

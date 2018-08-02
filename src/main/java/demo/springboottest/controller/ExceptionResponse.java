@@ -4,7 +4,6 @@ import java.util.Date;
 
 /*
  * Provides the details when an exception has occurred during processing.
- * 
  * @author rmorais
  */
 
@@ -16,10 +15,13 @@ public class ExceptionResponse {
 	/**
 	 * Constructs an exception response with the message and details.
 	 * 
-	 * @param timestamp The time at which the exception occurred.
-	 * @param message  The exception message.
-	 * @param details The exception details.  
-	 */	
+	 * @param timestamp
+	 *            The time at which the exception occurred.
+	 * @param message
+	 *            The exception message.
+	 * @param details
+	 *            The exception details.
+	 */
 	public ExceptionResponse(final Date timestamp, final String message, final String details) {
 		super();
 		this.timestamp = timestamp;
@@ -27,30 +29,30 @@ public class ExceptionResponse {
 		this.details = details;
 	}
 
-	/* 
-	 *  Provides the time at which the exception occurred.
+	/*
+	 * Provides the time at which the exception occurred.
 	 * 
-	 *  @return The time at which the exception occurred.
+	 * @return The time at which the exception occurred.
 	 */
-	public Date getTimestamp() {
+	public final Date getTimestamp() {
 		return timestamp;
 	}
 
 	/*
 	 * Provides the exception message.
 	 *
-	 *  @return The exception message.
+	 * @return The exception message.
 	 */
-	public String getMessage() {
+	public final String getMessage() {
 		return message;
 	}
 
 	/*
 	 * Provides the exception details.
 	 *
-	 *  @return The exception details.  
+	 * @return The exception details.
 	 */
-	public String getDetails() {
+	public final String getDetails() {
 		return details;
 	}
 

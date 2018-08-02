@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 
 /*
  * Indicates that an Employee object is not found in the database.
- * 
  * @author rmorais
  */
 

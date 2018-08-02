@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 
 /*
  * Represents the attributes of an Employee.
- * 
  * @author rmorais
  */
 
@@ -26,7 +25,6 @@ public class Employee {
 
 	/**
 	 * Creates an instance of Employee. (Required by JPA)
-	 * 
 	 */
 	public Employee() {
 	}
@@ -34,6 +32,8 @@ public class Employee {
 	/**
 	 * Creates an instance of Employee with the specified name.
 	 * 
+	 * @param name
+	 *            The Employee name.
 	 */
 	public Employee(String name) {
 		this.name = name;
@@ -51,7 +51,8 @@ public class Employee {
 	/**
 	 * Sets the Employee id.
 	 * 
-	 * @param id  The Employee id.
+	 * @param id
+	 *            The Employee id.
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -69,7 +70,8 @@ public class Employee {
 	/**
 	 * Sets the Employee name.
 	 * 
-	 * @param name  The Employee name.
+	 * @param name
+	 *            The Employee name.
 	 */
 	public void setName(String name) {
 		this.name = name;

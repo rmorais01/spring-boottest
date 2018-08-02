@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /*
  * SpringBoot Application.
- * 
  * @author rmorais
  */
 

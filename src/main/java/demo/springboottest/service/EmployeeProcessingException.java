@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 
 /*
  * Indicates that an error has occurred while processing an Employee object.
- * 
  * @author rmorais
  */
 @ResponseStatus(HttpStatus.BAD_REQUEST)
