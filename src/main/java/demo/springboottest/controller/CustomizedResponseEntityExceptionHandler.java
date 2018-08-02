@@ -17,35 +17,81 @@ import demo.springboottest.service.EmployeeProcessingException;
 
 /*
  * Converts an exception to a detailed error response message.
+ * 
+ * @author rmorais
+ *
  */
 
 @ControllerAdvice
 @RestController
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler(Exception.class)
-  public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
-		  ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getLocalizedMessage(), request.getDescription(false));
-		  return new ResponseEntity<Object>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR); 
-  }
-	
-  @ExceptionHandler(EmployeeProcessingException.class)
-  public final ResponseEntity<Object> handleProductProcessingExceptions(Exception ex, WebRequest request) {
-	  System.out.println("FAILED ## 1");
-	  ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getLocalizedMessage(), request.getDescription(false));
-	  return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
-  }
+	/**
+	 * Generic handler for all exceptions.
+	 *
+	 * @param ex The exception.
+	 * 
+	 * @param request The WebRequest. 
+	 * 
+	 * @return HTTP Status for Internal Server Error - 500.
+	 *         
+	 */
+	@ExceptionHandler(Exception.class)
+	public final ResponseEntity<Object> handleAllExceptions(final Exception ex, final WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getLocalizedMessage(), request.getDescription(false));
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR); 
+	}
 
-  @ExceptionHandler(EmployeeNotFoundException.class)
-  public final ResponseEntity<Object> handleProductNotFoundException(EmployeeNotFoundException ex, WebRequest request) {
-	  ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getLocalizedMessage(), request.getDescription(false));
-	  return new ResponseEntity<Object>(exceptionResponse, HttpStatus.NOT_FOUND);
-  }
+	/**
+	 * Handler for Employee processing exceptions.
+	 *
+	 * @param ex The exception.
+	 * 
+	 * @param request The WebRequest. 
+	 * 
+	 * @return HTTP Status for Bad Request - 400.
+	 *         
+	 */
+	@ExceptionHandler(EmployeeProcessingException.class)
+	public final ResponseEntity<Object> handleProductProcessingExceptions(final Exception ex, final WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getLocalizedMessage(), request.getDescription(false));
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
 
-  @Override
-  protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-	  System.out.println("FAILED ## 2");
-	  ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Validation Failed", ex.getLocalizedMessage());
-	  return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
-  } 
+	/**
+	 * Handler for Employee not found exceptions.
+	 *
+	 * @param ex The exception.
+	 * 
+	 * @param request The WebRequest. 
+	 * 
+	 * @return HTTP Status for Not Found - 404.
+	 *         
+	 */
+	@ExceptionHandler(EmployeeNotFoundException.class)
+	public final ResponseEntity<Object> handleProductNotFoundException(final EmployeeNotFoundException ex, final WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getLocalizedMessage(), request.getDescription(false));
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+
+	/**
+	 * Generic handler for Invalid arguments.
+	 *
+	 * @param ex The exception.
+	 * 
+	 * @param headers The HttpHeaders.
+	 * 
+	 * @param status The HttpStatus.
+	 * 
+	 * @param request The WebRequest. 
+	 * 
+	 * @return HTTP Status for Bad Request - 400.
+	 *         
+	 */
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex, final HttpHeaders headers, 
+			final HttpStatus status, final WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Validation Failed", ex.getLocalizedMessage());
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	} 
 }

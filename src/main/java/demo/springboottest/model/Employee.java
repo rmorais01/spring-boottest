@@ -9,27 +9,39 @@ import javax.validation.constraints.Size;
 
 /*
  * Represents the attributes of an Employee.
+ * 
+ * @author rmorais
  */
 
 @Entity
 @Table(name = "employee")
 public class Employee {
- 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
- 
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
 	@Size(min = 3, max = 20)
-    private String name;
- 
+	private String name;
+
+	/**
+	 * Creates an instance of Employee. (Required by JPA)
+	 * 
+	 */
 	public Employee() {
 	}
-	
+
+	/**
+	 * Creates an instance of Employee with the specified name.
+	 * 
+	 */
 	public Employee(String name) {
 		this.name = name;
 	}
-	
+
 	/**
+	 * Returns the Employee id.
+	 * 
 	 * @return The Employee id.
 	 */
 	public Long getId() {
@@ -37,6 +49,8 @@ public class Employee {
 	}
 
 	/**
+	 * Sets the Employee id.
+	 * 
 	 * @param id  The Employee id.
 	 */
 	public void setId(Long id) {
@@ -44,6 +58,8 @@ public class Employee {
 	}
 
 	/**
+	 * Returns the Employee name.
+	 * 
 	 * @return The Employee name.
 	 */
 	public String getName() {
@@ -51,10 +67,12 @@ public class Employee {
 	}
 
 	/**
+	 * Sets the Employee name.
+	 * 
 	 * @param name  The Employee name.
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-   
+
 }

@@ -3,6 +3,12 @@ package demo.springboottest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/*
+ * SpringBoot Application.
+ * 
+ * @author rmorais
+ */
+
 @SpringBootApplication
 public class SpringBoottestApplication {
 
