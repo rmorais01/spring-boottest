@@ -1,6 +1,6 @@
 /**
- * Controller and Exception Response handlers classes. 
- * 
+ * Controller and Exception Response handlers classes.
+ *
  * @author rmorais
  *
  */

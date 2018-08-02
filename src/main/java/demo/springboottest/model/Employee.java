@@ -7,8 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-/*
+/**
  * Represents the attributes of an Employee.
+ *
  * @author rmorais
  */
 
@@ -16,65 +17,74 @@ import javax.validation.constraints.Size;
 @Table(name = "employee")
 public class Employee {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    private final int minNameSize = 3;
+    private final int maxNameSize = 20;
 
-	@Size(min = 3, max = 20)
-	private String name;
+    /**
+     * Auto-generated.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	/**
-	 * Creates an instance of Employee. (Required by JPA)
-	 */
-	public Employee() {
-	}
+    /**
+     * Size between 3 and 20 characters.
+     */
+    @Size(min = minNameSize, max = maxNameSize)
+    private String name;
 
-	/**
-	 * Creates an instance of Employee with the specified name.
-	 * 
-	 * @param name
-	 *            The Employee name.
-	 */
-	public Employee(String name) {
-		this.name = name;
-	}
+    /**
+     * Creates an instance of Employee. (Required by JPA).
+     */
+    public Employee() {
+    }
 
-	/**
-	 * Returns the Employee id.
-	 * 
-	 * @return The Employee id.
-	 */
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Creates an instance of Employee with the specified name.
+     *
+     * @param name
+     *            The Employee name.
+     */
+    public Employee(final String name) {
+        this.name = name;
+    }
 
-	/**
-	 * Sets the Employee id.
-	 * 
-	 * @param id
-	 *            The Employee id.
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Returns the Employee id.
+     *
+     * @return The Employee id.
+     */
+    public final Long getId() {
+        return id;
+    }
 
-	/**
-	 * Returns the Employee name.
-	 * 
-	 * @return The Employee name.
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Sets the Employee id.
+     *
+     * @param id
+     *            The Employee id.
+     */
+    public final void setId(final Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * Sets the Employee name.
-	 * 
-	 * @param name
-	 *            The Employee name.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Returns the Employee name.
+     *
+     * @return The Employee name.
+     */
+    public final String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the Employee name.
+     *
+     * @param name
+     *            The Employee name.
+     */
+    public final void setName(final String name) {
+        this.name = name;
+    }
 
 }

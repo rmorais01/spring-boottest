@@ -1,6 +1,6 @@
 /**
- * Data model classes. 
- * 
+ * Data model classes.
+ *
  * @author rmorais
  *
  */

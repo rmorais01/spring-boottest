@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,7 +111,7 @@ public class EmployeeServiceUnitTest {
 	}
 
 	private void verifyFindByIdIsCalledOnce() {
-		Mockito.verify(employeeRepository, VerificationModeFactory.times(1)).findById(Mockito.anyLong());
+		Mockito.verify(employeeRepository, VerificationModeFactory.times(1)).findById(ArgumentMatchers.anyLong());
 		Mockito.reset(employeeRepository);
 	}
 

@@ -3,6 +3,7 @@ package demo.springboottest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class EmployeeControllerUnitTest {
 		public void whenPostEmployee_thenCreateEmployee() throws Exception {
 			Employee employee1 = new Employee("Employee 1");
 			employee1.setId(100L);
-			given(service.addEmployee(Mockito.any(Employee.class))).willReturn(employee1);
+			given(service.addEmployee(ArgumentMatchers.any(Employee.class))).willReturn(employee1);
 			
 			MvcResult mvcResult = mvc.perform(post("/rmtest/employees").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(employee1))).andReturn(); 
 			 
@@ -59,7 +60,7 @@ public class EmployeeControllerUnitTest {
 			assertThat(mvcResult.getResponse().getStatus() == HttpStatus.CREATED.ordinal());
 			assertThat(headerValue.endsWith("/rmtest/employees/100"));
 			    
-	 		verify(service, VerificationModeFactory.times(1)).addEmployee(Mockito.any(Employee.class));
+	 		verify(service, VerificationModeFactory.times(1)).addEmployee(ArgumentMatchers.any(Employee.class));
 			reset(service);
 		}
 		

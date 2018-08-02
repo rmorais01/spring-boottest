@@ -1,6 +1,6 @@
 /**
- * Application class. 
- * 
+ * Application class.
+ *
  * @author rmorais
  *
  */
