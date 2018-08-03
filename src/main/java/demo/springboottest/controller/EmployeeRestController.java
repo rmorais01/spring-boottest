@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,7 +20,7 @@ import demo.springboottest.service.EmployeeService;
 /**
  * REST web interface for managing the persistence and retrieval of
  * {@link Employee} object from database.
- * 
+ *
  * @author rmorais
  */
 
@@ -75,5 +76,23 @@ public class EmployeeRestController {
     public final Employee getEmployee(final @PathVariable Long id) {
         Employee employee = employeeService.getEmployeeById(id);
         return employee;
+    }
+
+    /**
+     * Finds employees by salary range.
+     *
+     * @param low
+     *            The low range of salary.
+     * @param high
+     *            The high range of salary.
+     * @return List of all employees in JSON format who meet the specified
+     *         criteria..
+     * @see Employee
+     */
+    @GetMapping("/employees/search/salary")
+    public final List<Employee> findEmployeesBySalaryRange(
+            final @RequestParam(name = "low", defaultValue = "25000") int low,
+            final @RequestParam(name = "high", defaultValue = "100000") int high) {
+        return employeeService.findEmployeesBySalaryRange(low, high);
     }
 }

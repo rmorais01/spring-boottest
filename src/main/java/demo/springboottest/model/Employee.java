@@ -21,7 +21,7 @@ public class Employee {
     private final int maxNameSize = 20;
 
     /**
-     * Auto-generated.
+     * Auto-generated id.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +33,8 @@ public class Employee {
     @Size(min = minNameSize, max = maxNameSize)
     private String name;
 
+    private Integer salary;
+
     /**
      * Creates an instance of Employee. (Required by JPA).
      */
@@ -40,13 +42,16 @@ public class Employee {
     }
 
     /**
-     * Creates an instance of Employee with the specified name.
+     * Creates an instance of Employee with the specified attributes.
      *
      * @param name
      *            The Employee name.
+     * @param name
+     *            The Employee salary.
      */
-    public Employee(final String name) {
+    public Employee(final String name, final Integer salary) {
         this.name = name;
+        this.salary = salary;
     }
 
     /**
@@ -85,6 +90,25 @@ public class Employee {
      */
     public final void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * Returns the Employee salary.
+     *
+     * @return The Employee salary.
+     */
+    public final Integer getSalary() {
+        return salary;
+    }
+
+    /**
+     * Sets the Employee salary.
+     *
+     * @param salary
+     *            The Employee salary.
+     */
+    public final void setSalary(final Integer salary) {
+        this.salary = salary;
     }
 
 }

@@ -12,7 +12,7 @@ import demo.springboottest.repository.EmployeeRepository;
 /**
  * Implements the EmployeeService interface for managing the persistence and
  * retrieval of Employee object from database.
- * 
+ *
  * @author rmorais
  */
 
@@ -63,5 +63,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             throw new EmployeeNotFoundException(String.format("Employee [%s] doesn't exist.", name));
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final List<Employee> findEmployeesBySalaryRange(final Integer low, final Integer high) {
+        return employeeRepository.findBySalaryRange(low, high);
     }
 }

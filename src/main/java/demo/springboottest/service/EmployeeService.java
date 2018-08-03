@@ -7,7 +7,7 @@ import demo.springboottest.model.Employee;
 /**
  * Service interface for managing the persistence and retrieval of
  * {@link Employee} object from database.
- * 
+ *
  * @author rmorais
  */
 
@@ -59,4 +59,18 @@ public interface EmployeeService {
      * @see Employee
      */
     Employee getEmployeeByName(final String name);
+
+    /**
+     * Finds employees by salary range.
+     *
+     * @param low
+     *            The low range of salary.
+     * @param high
+     *            The high range of salary.
+     *
+     * @return A List of Employees who meet the specified criteria.
+     * @see Employee
+     */
+    List<Employee> findEmployeesBySalaryRange(final Integer low, final Integer high);
+
 }
