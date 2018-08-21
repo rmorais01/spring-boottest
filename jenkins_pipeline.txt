@@ -1,0 +1,73 @@
+node {
+    dir('spring-boottest') {
+        stage 'Clone the project'
+        git '<location of local/remote project>'
+    }
+    
+    dir('spring-boottest') {
+        stage("Compilation and Analysis") {
+            parallel 'Compilation': {
+                sh "./mvnw clean install -DskipTests"
+            }, 'Static Analysis': {
+                stage("Checkstyle") {
+                    sh "./mvnw checkstyle:checkstyle"
+                     
+                    step([$class: 'CheckStylePublisher',
+                      canRunOnFailed: true,
+                      defaultEncoding: '',
+                      healthy: '100',
+                      pattern: '**/target/checkstyle-result.xml',
+                      unHealthy: '90',
+                      useStableBuildAsReference: true
+                    ])
+                }
+            }
+        }
+         
+        stage("Tests and Deployment") {
+            parallel 'Unit tests': {
+                stage("Runing unit tests") {
+                    try {
+                        sh "./mvnw test -P unit"
+                    } catch(err) {
+                        step([$class: 'JUnitResultArchiver', testResults: 
+                          '**/target/surefire-reports/TEST-*UnitTest.xml'])
+                        throw err
+                    }
+                   step([$class: 'JUnitResultArchiver', testResults: 
+                     '**/target/surefire-reports/TEST-*UnitTest.xml'])
+                }
+            }, 'Integration tests': {
+                stage("Runing integration tests") {
+                    try {
+                        sh "./mvnw integration-test -P integration"
+                    } catch(err) {
+                        step([$class: 'JUnitResultArchiver', testResults: 
+                          '**/target/failsafe-reports/TEST-'
+                            + '*IntegrationTest.xml'])
+                        throw err
+                    }
+                    step([$class: 'JUnitResultArchiver', testResults: 
+                      '**/target/failsafe-reports/TEST-'
+                        + '*IntegrationTest.xml'])
+                }
+            }
+             
+            stage("Staging") {
+                if (isUnix()) {
+                    sh "pid=\$(lsof -i:8080 -t) || echo 'process not running on port 8080' ; if [[ ! -z \$pid ]]; then kill -TERM \$pid || kill -KILL \$pid; fi"
+                } else {
+                    bat "FOR /F \"tokens=5 delims= \" %%G IN (\"netstat -a | findstr :8080\") DO TaskKill.exe /PID %%G /fi \"memusage gt 0\""
+                }
+
+                withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+                    if (isUnix()) {
+                        sh 'nohup ./mvnw spring-boot:run -Dserver.port=8080 &'
+                    } else {
+                        bat 'start ./mvnw.cmd spring-boot:run -Dserver.port=8080'
+                    }
+                }
+            }
+        }
+    }
+}
